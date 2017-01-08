@@ -17,7 +17,7 @@ def BuyShoes(driver):
     ItemWebListingAddress = "http://www.adidas.com/us/alphabounce-xeno-shoes/B39074.html"
     
     #driver = webdriver.Chrome()
-    driver.get(ItemWebListingAddress)
+    #driver.get(ItemWebListingAddress)
     sizeDropdown = driver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[2]/div[2]/div/div/a""").click()
     delay1()
     size = driver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[2]/div[2]/div/div/div/div[2]/div/ul/li[{0}]/span""".format(str(((ShoeSize-8)*2)+2))).click()
@@ -50,12 +50,12 @@ def Startup():
     webDriver.get("http://www.adidas.com/us/alphabounce-xeno-shoes/B39074.html")
     while Running:
         print("Checking Status")
-        webDriver.refresh()
         if (Bought == False and webDriver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[8]/button""").is_enabled()):
             BuyShoes(webDriver)
             Bought = True
             Running = False
         time.sleep(1)
+        webDriver.refresh()
     print("Shoes Have Been Added To Cart And Other Info Entered Automatically")
     input()
 
