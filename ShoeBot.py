@@ -50,6 +50,7 @@ def Startup():
     webDriver.get("http://www.adidas.com/us/ultra-boost-uncaged-chinese-new-year-shoes/BB3522.html")
     while Running:
         print("Checking Status")
+        driver.refresh()
         if (Bought == False and webDriver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[9]/button""").is_enabled()):
             BuyShoes()
             Bought = True
