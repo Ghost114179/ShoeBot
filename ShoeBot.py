@@ -6,7 +6,7 @@ def delay1():
     time.sleep(0.5)
 
 def BuyShoes():
-    ShoeSize = 9.5
+    ShoeSize = 10.5 ## MUST BE IN HALF SIZE INCREMENTS FROM 8 TO 14!!!!!!
     Name = "Andrew"
     LastName = "Kantola"
     StreetAddress = "Street"
@@ -20,7 +20,7 @@ def BuyShoes():
     driver.get(ItemWebListingAddress)
     sizeDropdown = driver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[2]/div[2]/div/div/a""").click()
     delay1()
-    size = driver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[2]/div[2]/div/div/div/div[2]/div/ul/li[{0}]/span""".format(str(((ShoeSize-8)*2)+2)).click()
+    size = driver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[2]/div[2]/div/div/div/div[2]/div/ul/li[{0}]/span""".format(str(((ShoeSize-8)*2)+2))).click()
     delay1()
     addToCart = driver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[8]/button""").click()
     delay1()
@@ -44,6 +44,20 @@ def BuyShoes():
     input()
 
 def Startup():
-    Running = True;
+    Running = True
+    Bought = False
     webDriver = webdriver.Chrome()
-    driver.get("http://www.adidas.com/us/alphabounce-xeno-shoes/B39074.html")
+    webDriver.get("http://www.adidas.com/us/ultra-boost-uncaged-chinese-new-year-shoes/BB3522.html")
+    while Running:
+        print("Checking Status")
+        if (Bought == False and webDriver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[9]/button""").is_enabled()):
+            BuyShoes()
+            Bought = True
+            Running = False
+        time.sleep(1)
+        
+
+Startup()
+
+
+    
