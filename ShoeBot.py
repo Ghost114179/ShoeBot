@@ -5,7 +5,7 @@ import time
 def delay1():
     time.sleep(0.5)
 
-def BuyShoes():
+def BuyShoes(driver):
     ShoeSize = 10.5 ## MUST BE IN HALF SIZE INCREMENTS FROM 8 TO 14!!!!!!
     Name = "Andrew"
     LastName = "Kantola"
@@ -16,7 +16,7 @@ def BuyShoes():
     Email = "email@email.com"
     ItemWebListingAddress = "http://www.adidas.com/us/alphabounce-xeno-shoes/B39074.html"
     
-    driver = webdriver.Chrome()
+    #driver = webdriver.Chrome()
     driver.get(ItemWebListingAddress)
     sizeDropdown = driver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[2]/div[2]/div/div/a""").click()
     delay1()
@@ -41,22 +41,23 @@ def BuyShoes():
     shippingOption = driver.find_element_by_xpath("""//*[@id="shippingoptions"]/div/ul/li[2]""").click()
     delay1()
     reviewAndPay = driver.find_element_by_xpath("""//*[@id="dwfrm_delivery_savedelivery"]""").click()
-    input()
 
 def Startup():
     Running = True
     Bought = False
     webDriver = webdriver.Chrome()
-    webDriver.get("http://www.adidas.com/us/ultra-boost-uncaged-chinese-new-year-shoes/BB3522.html")
+    ##webDriver.get("http://www.adidas.com/us/ultra-boost-uncaged-chinese-new-year-shoes/BB3522.html")
+    webDriver.get("http://www.adidas.com/us/alphabounce-xeno-shoes/B39074.html")
     while Running:
         print("Checking Status")
-        driver.refresh()
-        if (Bought == False and webDriver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[9]/button""").is_enabled()):
-            BuyShoes()
+        webDriver.refresh()
+        if (Bought == False and webDriver.find_element_by_xpath("""//*[@id="buy-block"]/div[1]/div[5]/div[2]/form/div[8]/button""").is_enabled()):
+            BuyShoes(webDriver)
             Bought = True
             Running = False
         time.sleep(1)
-        
+    print("Shoes Have Been Added To Cart And Other Info Entered Automatically")
+    input()
 
 Startup()
 
